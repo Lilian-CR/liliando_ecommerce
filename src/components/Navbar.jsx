@@ -56,7 +56,7 @@ function Navbar({ cartCount }) {
             <img
               src={StoreLogo}
               alt="LILIANDO Store Logo"
-              className="h-16"
+              className="h-12 w-auto max-w-[140px] object-contain"
             />
           </div>
           <input
