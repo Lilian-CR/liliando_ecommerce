@@ -1,0 +1,3 @@
+node_modules
+.next
+buildnpx prettier --write .
