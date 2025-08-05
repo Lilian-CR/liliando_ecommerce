@@ -1,13 +1,22 @@
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
 import { ShoppingCart, Menu } from "lucide-react";
 import StoreLogo from "../images/LILIANDO_store_logo.png";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // ✅ Added useEffect
 
 function Navbar({ cartCount }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // ✅ Scroll lock for mobile menu
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [menuOpen]);
 
   const handleScroll = (e, id) => {
     e.preventDefault();
