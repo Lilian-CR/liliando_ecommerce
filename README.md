@@ -21,7 +21,7 @@ pages/
 
 ---
 ### Screenshot
-![LILIANDO Screenshot](https://raw.githubusercontent.com/Lilian-CR/liliando-ecommerce/main/src/images/readme_pic.png)
+![LILIANDO Screenshot](https://raw.githubusercontent.com/Lilian-CR/liliando-ecommerce/main/readme_pic.png)
 
 ---
 
