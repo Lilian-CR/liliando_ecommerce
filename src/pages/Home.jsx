@@ -97,7 +97,7 @@ function Home({ onAddToCart }) {
           {/* Text */}
           <div className="text-justify md:pl-12 px-2 md:px-0">
             <p className="leading-relaxed text-sm sm:text-base">
-              <strong>LILIANDO-</strong> is your indie, alternative, and punk-rock-rooted gateway to ethical fashion.
+              <strong>LILIANDO</strong> is your indie, alternative, and punk-rock-rooted gateway to ethical fashion.
               Born from rebellion against fast fashion, LILIANDO celebrates diversity, attitude, and timeless streetwear aesthetics — powered by brands like <span className="font-semibold">Dickies</span>, <span className="font-semibold">Hell Bunny</span> and <span className="font-semibold">Vans</span>.
               <br /><br />
               This project is the continuation of Lilian Rodrigues’{" "}
