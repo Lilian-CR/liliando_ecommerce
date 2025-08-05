@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
 import { ShoppingCart, Menu } from "lucide-react";
 import StoreLogo from "../images/LILIANDO_store_logo.png";
-import { useState, useEffect } from "react"; // ✅ Added useEffect
+import { useState, useEffect } from "react";
 
 function Navbar({ cartCount }) {
   const location = useLocation();
@@ -9,33 +9,21 @@ function Navbar({ cartCount }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // ✅ Scroll lock for mobile menu
+  // Scroll lock for mobile menu
   useEffect(() => {
-    if (menuOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
+    document.body.classList.toggle("overflow-hidden", menuOpen);
   }, [menuOpen]);
 
   const handleScroll = (e, id) => {
     e.preventDefault();
-
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
-        const section = document.getElementById(id);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
-        }
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       }, 100);
     } else {
-      const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
-
     setMenuOpen(false);
   };
 
@@ -58,7 +46,8 @@ function Navbar({ cartCount }) {
 
   return (
     <nav className="sticky top-0 z-50 bg-white text-primary shadow-md">
-      <div className="hidden md:flex items-center justify-between px-4 py-3 md:px-10 lg:px-20">
+      {/* Desktop View */}
+      <div className="hidden lg:flex items-center justify-between px-4 py-3 lg:px-10 xl:px-20">
         {/* Logo */}
         <div
           onClick={(e) => handleScroll(e, "home")}
@@ -111,7 +100,6 @@ function Navbar({ cartCount }) {
             onKeyDown={handleSearch}
             className="border border-primary px-4 py-2 w-48"
           />
-
           <button
             onClick={() => navigate("/cart")}
             aria-label="View cart"
@@ -128,11 +116,8 @@ function Navbar({ cartCount }) {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden px-4 py-3 flex justify-between items-center">
-        <div
-          onClick={(e) => handleScroll(e, "home")}
-          className="cursor-pointer"
-        >
+      <div className="lg:hidden px-4 py-3 flex justify-between items-center">
+        <div onClick={(e) => handleScroll(e, "home")} className="cursor-pointer">
           <img
             src={StoreLogo}
             alt="LILIANDO Store Logo"
@@ -155,7 +140,6 @@ function Navbar({ cartCount }) {
           </button>
 
           <button
-            className=""
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -166,7 +150,7 @@ function Navbar({ cartCount }) {
 
       {/* Mobile Menu Dropdown */}
       {menuOpen && (
-        <div className="md:hidden px-4 pb-4 flex flex-col gap-2 font-bold text-sm uppercase bg-white shadow-inner">
+        <div className="lg:hidden px-4 pb-4 flex flex-col gap-2 font-bold text-sm uppercase bg-white shadow-inner">
           <input
             type="text"
             placeholder="Search products..."
