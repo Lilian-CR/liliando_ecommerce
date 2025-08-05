@@ -51,7 +51,7 @@ pages/
 
 ## Solution URL
 GitHub repository:  
-[https://github.com/Lilian-CR/liliando-ecommerce](https://github.com/Lilian-CR/liliando_ecommerce) 
+[https://github.com/Lilian-CR/liliando_ecommerce](https://github.com/Lilian-CR/liliando_ecommerce) 
 
 ---
 
