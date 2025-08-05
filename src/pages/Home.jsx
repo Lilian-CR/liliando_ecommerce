@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import SkaterGirl1 from "../images/skater-girl-01.jpg";
 import SkaterGirl2 from "../images/skater-girl-02.jpeg";
 import AboutPreview from "../images/about-preview.jpg";
@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 
 function Home({ onAddToCart }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const categorySections = [
     { id: "accessories", title: "ACCESSORIES", bg: "bg-primary/50" },
@@ -26,6 +27,19 @@ function Home({ onAddToCart }) {
         behavior: "smooth",
       });
     }
+  };
+
+  // Back to top button visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -159,6 +173,17 @@ function Home({ onAddToCart }) {
           </div>
         </div>
       </section>
+
+      {/* Back to Top for mobile */}
+      {showBackToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-5 right-5 z-40 md:hidden bg-primary text-white rounded-full p-3 shadow-lg hover:bg-primary/80 transition"
+          aria-label="Back to top"
+        >
+          ↑
+        </button>
+      )}
 
       {/* Modal */}
       {selectedProduct && (
