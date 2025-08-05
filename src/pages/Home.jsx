@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SkaterGirl1 from "../images/skater-girl-01.jpg";
 import SkaterGirl2 from "../images/skater-girl-02.jpeg";
 import AboutPreview from "../images/about-preview.jpg";
@@ -27,6 +27,18 @@ function Home({ onAddToCart }) {
       bg: "bg-primary/90",
     },
   ];
+
+  const scrollRefs = useRef({});
+
+  const scroll = (id, direction) => {
+    const container = scrollRefs.current[id];
+    if (container) {
+      container.scrollBy({
+        left: direction === "right" ? 300 : -300,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <>
@@ -64,17 +76,33 @@ function Home({ onAddToCart }) {
 
       <div className="h-1 bg-white/30" />
 
-      {/* DRY Product Sections: Accessories, Clothing, Shoes */}
+      {/* Product Sections with Scrollable Arrows */}
       {categorySections.map(({ id, title, bg }) => (
         <div key={id}>
           <section id={id} className={`scroll-mt-24 py-8 px-4 text-black ${bg}`}>
-            <h2 className="text-2xl font-bold mb-6 text-center relative">
-              {title}
-              <span className="hidden md:inline absolute right-4 top-1/2 -translate-y-1/2 text-lg text-gray-400">
-                ➡️
-              </span>
-            </h2>
-            <div className="flex gap-4 overflow-x-auto pb-4 px-1 sm:px-2 scrollbar-hide snap-x snap-mandatory">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold">{title}</h2>
+              <div className="hidden md:flex gap-2">
+                <button
+                  aria-label="Scroll left"
+                  onClick={() => scroll(id, "left")}
+                  className="bg-white text-primary rounded-full w-8 h-8 shadow hover:bg-primary hover:text-white transition"
+                >
+                  ←
+                </button>
+                <button
+                  aria-label="Scroll right"
+                  onClick={() => scroll(id, "right")}
+                  className="bg-white text-primary rounded-full w-8 h-8 shadow hover:bg-primary hover:text-white transition"
+                >
+                  →
+                </button>
+              </div>
+            </div>
+            <div
+              ref={(el) => (scrollRefs.current[id] = el)}
+              className="flex gap-4 overflow-x-auto pb-4 px-1 sm:px-2 scrollbar-hide snap-x snap-mandatory scroll-smooth"
+            >
               {products
                 .filter((product) => product.category === id)
                 .map((product) => (
@@ -97,9 +125,7 @@ function Home({ onAddToCart }) {
       {/* About */}
       <section id="about" className="scroll-mt-24 py-8 px-4 bg-gray-100 text-primary">
         <h2 className="text-2xl font-bold mb-6 md:mb-8 text-left md:ml-32">ABOUT</h2>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center max-w-6xl mx-auto">
-          {/* Text */}
           <div className="text-justify md:pl-12 px-2 md:px-0">
             <p className="leading-relaxed text-sm sm:text-base">
               <strong>LILIANDO</strong> is your indie, alternative, and punk-rock-rooted gateway to ethical fashion.
@@ -122,7 +148,6 @@ function Home({ onAddToCart }) {
             </p>
           </div>
 
-          {/* Image */}
           <div className="flex justify-center">
             <img
               src={AboutPreview}
@@ -133,7 +158,6 @@ function Home({ onAddToCart }) {
         </div>
       </section>
 
-      {/* Modal */}
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
@@ -142,7 +166,6 @@ function Home({ onAddToCart }) {
         />
       )}
 
-      {/* Footer */}
       <Footer />
     </>
   );
