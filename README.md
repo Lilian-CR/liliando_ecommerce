@@ -7,16 +7,17 @@ This project is the continuation of Lilian Rodrigues’ first-ever HTML/CSS webs
 [https://codepen.io/Lilian-Rodrigues/pen/XWQGJbB](https://codepen.io/Lilian-Rodrigues/pen/XWQGJbB)
 
 components/
-  - Navbar.jsx
-  - ProductCard.jsx
-  - ProductModal.jsx
-
+- Navbar.jsx
+- Footer.jsx
+- ProductCard.jsx
+- ProductModal.jsx
+  
 pages/
-  - Home.jsx
-  - Products.jsx
-  - Cart.jsx
-  - Checkout.jsx
-  - ProductPage.jsx
+- Home.jsx
+- Products.jsx
+- Cart.jsx
+- Checkout.jsx
+- ProductPage.jsx
 
 
 ---
@@ -26,10 +27,11 @@ pages/
 
 ---
 
-## Features
+### Features
 
 ### Users can:
 - View products organized by category: Accessories, Clothing, and Shoes
+- Scroll product sections horizontally (Zalando-style layout)
 - Search for products by name or brand
 - Filter products by brand or category
 - View individual product pages with image galleries
@@ -37,6 +39,8 @@ pages/
 - Proceed to a styled checkout form (demo only)
 - See a modal confirmation after 'placing' an order
 - Experience persistent cart data via localStorage
+- Scroll-to-top button appears on mobile for smoother navigation
+
 
 ---
 
@@ -52,21 +56,26 @@ GitHub repository:
 ---
 
 ## Tools & Technologies
-- **React** — component-based UI framework
-- **Vite** — fast build tool for modern web apps
-- **Tailwind CSS** — utility-first styling framework
-- **React Router DOM** — for page navigation
-- **Lucide React** — icon set
-- **LocalStorage** — cart state persistence
+
+- **React** — Component-based UI framework
+- **Vite** — Lightning-fast build tool
+- **Tailwind CSS** — Utility-first CSS framework
+- **React Router DOM** — Page navigation and routing
+- **Lucide React** — Icon library
+- **LocalStorage** — Cart state persistence
+- **Netlify** — Deployment
 
 ---
 
-## Resources
-- Tailwind CSS Docs: https://tailwindcss.com
-- React Docs: https://reactjs.org
-- Lucide Icons: https://lucide.dev
-- CodeCademy: https://www.codecademy.com/
-- Inspiration: Zalando, Street Wear aesthetics, Vans, Dickies, Hell Bunny, Canva visuals
+## Resources & Inspiration
+
+- [Tailwind CSS Docs](https://tailwindcss.com)
+- [React Docs](https://reactjs.org)
+- [Lucide Icons](https://lucide.dev)
+- [CodeCademy](https://www.codecademy.com/)
+- Inspiration: Zalando UX, Vans, Dickies, Hell Bunny, Canva, and bold streetwear aesthetics
+
+---
 
 ---
 
