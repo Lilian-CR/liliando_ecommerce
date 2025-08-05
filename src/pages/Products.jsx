@@ -8,13 +8,14 @@ function Products({ onAddToCart }) {
   const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
+  const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
     const search = searchParams.get("search");
     if (search) setSearchTerm(search);
   }, [searchParams]);
 
-  const filteredProducts = products.filter((product) => {
+  let filteredProducts = products.filter((product) => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.brand.toLowerCase().includes(searchTerm.toLowerCase());
@@ -27,6 +28,17 @@ function Products({ onAddToCart }) {
     return matchesSearch && matchesFilter;
   });
 
+  // Sorting logic
+  if (sortBy === "priceLow") {
+    filteredProducts.sort((a, b) => a.price - b.price);
+  } else if (sortBy === "priceHigh") {
+    filteredProducts.sort((a, b) => b.price - a.price);
+  } else if (sortBy === "nameAZ") {
+    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortBy === "nameZA") {
+    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+  }
+
   const uniqueFilters = [
     "all",
     ...new Set(products.map((p) => p.brand).concat(products.map((p) => p.category))),
@@ -36,8 +48,9 @@ function Products({ onAddToCart }) {
     <div className="min-h-screen bg-white text-primary px-4 sm:px-6 lg:px-8 py-10">
       <h1 className="text-3xl font-bold mb-6 text-center">All Products</h1>
 
-      {/* Filter */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+      {/* Filters and Sort */}
+      <div className="flex flex-col sm:flex-row flex-wrap items-center justify-between gap-4 mb-6">
+        {/* Filter Dropdown */}
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
@@ -48,6 +61,19 @@ function Products({ onAddToCart }) {
               {f.charAt(0).toUpperCase() + f.slice(1)}
             </option>
           ))}
+        </select>
+
+        {/* Sort Dropdown */}
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="border border-gray-300 rounded px-4 py-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
+        >
+          <option value="default">Sort by</option>
+          <option value="priceLow">Price: Low → High</option>
+          <option value="priceHigh">Price: High → Low</option>
+          <option value="nameAZ">Name: A → Z</option>
+          <option value="nameZA">Name: Z → A</option>
         </select>
       </div>
 
