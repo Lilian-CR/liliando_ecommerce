@@ -65,54 +65,61 @@ function Home({ onAddToCart }) {
       <div className="h-1 bg-white/30" />
 
       {/* Zalando-style Product Sections */}
-      {categorySections.map(({ id, title, bg }) => (
-        <div key={id}>
-          <section id={id} className={`scroll-mt-24 py-8 px-4 text-black ${bg}`}>
-            <h2 className="text-2xl font-bold mb-6 text-center">{title}</h2>
+      {categorySections.map(({ id, title, bg }) => {
+        const sectionProducts = products.filter((p) => p.category === id);
+        return (
+          <div key={id}>
+            <section id={id} className={`scroll-mt-24 py-8 px-4 text-black ${bg}`}>
+              <h2 className="text-2xl font-bold mb-6 text-center">{title}</h2>
 
-            <div className="relative">
-              {/* Left Arrow */}
-              <button
-                aria-label="Scroll left"
-                onClick={() => scroll(id, "left")}
-                className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-300 w-10 h-10 items-center justify-center shadow hover:bg-primary hover:text-white transition"
-              >
-                ←
-              </button>
+              {sectionProducts.length === 0 ? (
+                <p className="text-center text-sm text-gray-600">
+                  No items in this category right now — check back soon!
+                </p>
+              ) : (
+                <div className="relative">
+                  {/* Left Arrow */}
+                  <button
+                    aria-label="Scroll left"
+                    onClick={() => scroll(id, "left")}
+                    className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-300 w-10 h-10 items-center justify-center shadow hover:bg-primary hover:text-white transition"
+                  >
+                    ←
+                  </button>
 
-              {/* Product Row */}
-              <div
-                ref={(el) => (scrollRefs.current[id] = el)}
-                className="flex gap-4 overflow-x-auto pb-4 px-6 sm:px-10 scrollbar-hide snap-x snap-mandatory scroll-smooth"
-              >
-                {products
-                  .filter((product) => product.category === id)
-                  .map((product) => (
-                    <div key={product.id} className="flex-none w-[260px] snap-start">
-                      <ProductCard
-                        image={product.image}
-                        name={product.name}
-                        price={product.price}
-                        brand={product.brand}
-                        onClick={() => setSelectedProduct(product)}
-                      />
-                    </div>
-                  ))}
-              </div>
+                  {/* Product Row */}
+                  <div
+                    ref={(el) => (scrollRefs.current[id] = el)}
+                    className="flex gap-4 overflow-x-auto pb-4 px-6 sm:px-10 scrollbar-hide snap-x snap-mandatory scroll-smooth"
+                  >
+                    {sectionProducts.map((product) => (
+                      <div key={product.id} className="flex-none w-[260px] snap-start">
+                        <ProductCard
+                          image={product.image}
+                          name={product.name}
+                          price={product.price}
+                          brand={product.brand}
+                          onClick={() => setSelectedProduct(product)}
+                        />
+                      </div>
+                    ))}
+                  </div>
 
-              {/* Right Arrow */}
-              <button
-                aria-label="Scroll right"
-                onClick={() => scroll(id, "right")}
-                className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-300 w-10 h-10 items-center justify-center shadow hover:bg-primary hover:text-white transition"
-              >
-                →
-              </button>
-            </div>
-          </section>
-          <div className="h-1 bg-white/30" />
-        </div>
-      ))}
+                  {/* Right Arrow */}
+                  <button
+                    aria-label="Scroll right"
+                    onClick={() => scroll(id, "right")}
+                    className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-300 w-10 h-10 items-center justify-center shadow hover:bg-primary hover:text-white transition"
+                  >
+                    →
+                  </button>
+                </div>
+              )}
+            </section>
+            <div className="h-1 bg-white/30" />
+          </div>
+        );
+      })}
 
       {/* About */}
       <section id="about" className="scroll-mt-24 py-8 px-4 bg-gray-100 text-primary">
