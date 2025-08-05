@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
 
-function Products() {
+function Products({ onAddToCart }) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,6 +65,7 @@ function Products() {
                 name={product.name}
                 price={product.price}
                 brand={product.brand}
+                onAddToCart={() => onAddToCart(product)}
               />
             </div>
           ))}
