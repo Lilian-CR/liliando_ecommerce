@@ -20,8 +20,10 @@ pages/
 
 
 ---
+
 ### Screenshot
 ![LILIANDO Screenshot](https://raw.githubusercontent.com/Lilian-CR/liliando-ecommerce/main/readme_pic.png)
+
 
 ---
 
