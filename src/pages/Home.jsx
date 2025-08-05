@@ -50,15 +50,15 @@ function Home({ onAddToCart }) {
 
         <div className="md:col-span-2 flex flex-col sm:flex-row justify-center gap-4 md:gap-0">
           <img
-  src={SkaterGirl1}
-  alt="Skater Girl 01"
-  className="aspect-[3/4] shadow-lg w-full sm:w-1/2 object-cover"
-/>
-<img
-  src={SkaterGirl2}
-  alt="Skater Girl 02"
-  className="aspect-[3/4] shadow-lg w-full sm:w-1/2 object-cover"
-/>
+            src={SkaterGirl1}
+            alt="Skater Girl 01"
+            className="aspect-[3/4] shadow-lg w-full sm:w-1/2 object-cover"
+          />
+          <img
+            src={SkaterGirl2}
+            alt="Skater Girl 02"
+            className="aspect-[3/4] shadow-lg w-full sm:w-1/2 object-cover"
+          />
         </div>
       </section>
 
@@ -68,7 +68,12 @@ function Home({ onAddToCart }) {
       {categorySections.map(({ id, title, bg }) => (
         <div key={id}>
           <section id={id} className={`scroll-mt-24 py-8 px-4 text-black ${bg}`}>
-            <h2 className="text-2xl font-bold mb-6 text-center">{title}</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center relative">
+              {title}
+              <span className="hidden md:inline absolute right-4 top-1/2 -translate-y-1/2 text-lg text-gray-400">
+                ➡️
+              </span>
+            </h2>
             <div className="flex gap-4 overflow-x-auto pb-4 px-1 sm:px-2 scrollbar-hide snap-x snap-mandatory">
               {products
                 .filter((product) => product.category === id)
@@ -128,7 +133,7 @@ function Home({ onAddToCart }) {
         </div>
       </section>
 
-     {/* Modal */}
+      {/* Modal */}
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
