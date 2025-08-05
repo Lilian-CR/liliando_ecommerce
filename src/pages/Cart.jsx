@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useCart } from "../context/CartContext"; // ✅ import context
+import { useCart } from "../context/CartContext";
 
 function Cart() {
   const {
@@ -8,7 +8,7 @@ function Cart() {
     removeFromCart,
     clearCart,
     updateQuantity,
-  } = useCart(); // ✅ use values directly
+  } = useCart();
   const [showMessage, setShowMessage] = useState("");
 
   const total = cartItems.reduce(
@@ -24,7 +24,7 @@ function Cart() {
 
   const handleRemove = (index) => {
     const itemName = cartItems[index].name;
-    removeFromCart(index); // ✅ using context method
+    removeFromCart(index);
     setShowMessage(`Removed: ${itemName}`);
     setTimeout(() => setShowMessage(""), 3000);
   };
@@ -51,7 +51,7 @@ function Cart() {
           <ul className="space-y-6">
             {cartItems.map((item, index) => (
               <li
-                key={item.id || index} // ✅ updated to use unique key if available
+                key={item.id}
                 className="border-b pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
               >
                 <div className="flex gap-4">
@@ -67,9 +67,9 @@ function Cart() {
                       €{item.price.toFixed(2)}
                     </p>
                     <div className="flex items-center gap-2 mt-2">
-                      <label htmlFor={`quantity-${index}`}>Qty:</label>
+                      <label htmlFor={`quantity-${item.id}`}>Qty:</label>
                       <input
-                        id={`quantity-${index}`}
+                        id={`quantity-${item.id}`}
                         type="number"
                         min="1"
                         value={item.quantity}
