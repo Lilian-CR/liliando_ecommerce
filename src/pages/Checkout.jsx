@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext"; 
+
 function Checkout({ cartItems = [] }) {
   const [name, setName] = useState(localStorage.getItem("checkoutName") || "");
   const [email, setEmail] = useState(localStorage.getItem("checkoutEmail") || "");
@@ -32,8 +33,18 @@ function Checkout({ cartItems = [] }) {
     setZip("");
     setCountry("");
     setPayment("");
-    localStorage.clear(); 
-    clearCart(); 
+
+    // ✅ Clear only specific items from localStorage
+    localStorage.removeItem("liliando_cart");
+    localStorage.removeItem("checkoutName");
+    localStorage.removeItem("checkoutEmail");
+    localStorage.removeItem("checkoutStreet");
+    localStorage.removeItem("checkoutZip");
+    localStorage.removeItem("checkoutCountry");
+    localStorage.removeItem("checkoutPayment");
+
+    // ✅ Clear cart from context too
+    clearCart();
   };
 
   return (
@@ -43,8 +54,8 @@ function Checkout({ cartItems = [] }) {
         <div className="max-w-lg mx-auto mb-6 bg-white p-4 rounded shadow">
           <h3 className="text-lg font-bold mb-2">Cart Summary</h3>
           <ul className="text-sm space-y-1">
-            {items.map((item, i) => (
-              <li key={item.id || i}>
+            {items.map((item) => (
+              <li key={item.id}>
                 {item.name} – {item.quantity} × €{item.price}
               </li>
             ))}
