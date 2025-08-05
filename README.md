@@ -47,7 +47,7 @@ pages/
 
 ## Solution URL
 GitHub repository:  
-[https://github.com/Lilian-CR/liliando-ecommerce](https://github.com/Lilian-CR/liliando-ecommerce) 
+[https://github.com/Lilian-CR/liliando-ecommerce](https://github.com/Lilian-CR/liliando_ecommerce) 
 
 ---
 
@@ -65,7 +65,7 @@ GitHub repository:
 - Tailwind CSS Docs: https://tailwindcss.com
 - React Docs: https://reactjs.org
 - Lucide Icons: https://lucide.dev
-- CodeCademy:
+- CodeCademy: https://www.codecademy.com/
 - Inspiration: Zalando, Street Wear aesthetics, Vans, Dickies, Hell Bunny, Canva visuals
 
 ---
@@ -75,11 +75,11 @@ GitHub repository:
 To run locally:
 1. Clone the repository:
 ```bash
-git clone https://github.com/Lilian-CR/liliando-ecommerce.git
+git clone https://github.com/Lilian-CR/liliando_ecommerce.git
 ```
 2. Navigate into the project folder:
 ```bash
-cd liliando-ecommerce
+cd liliando_ecommerce
 ```
 3. Install dependencies:
 ```bash
