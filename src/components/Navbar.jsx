@@ -49,28 +49,60 @@ function Navbar({ cartCount }) {
 
   return (
     <nav className="sticky top-0 z-50 bg-white text-primary shadow-md">
-      <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 px-4 py-3 md:px-32">
-        {/* Logo + Search */}
-        <div className="flex items-center gap-4 flex-grow">
-          <div onClick={(e) => handleScroll(e, "home")} className="cursor-pointer">
-            <img
-              src={StoreLogo}
-              alt="LILIANDO Store Logo"
-              className="h-12 w-auto max-w-[140px] object-contain"
-            />
-          </div>
+      <div className="hidden md:flex items-center justify-between px-4 py-3 md:px-10 lg:px-20">
+        {/* Logo */}
+        <div
+          onClick={(e) => handleScroll(e, "home")}
+          className="cursor-pointer flex-shrink-0"
+        >
+          <img
+            src={StoreLogo}
+            alt="LILIANDO Store Logo"
+            className="h-12 w-auto object-contain"
+          />
+        </div>
+
+        {/* Navigation links */}
+        <ul className="flex gap-4 font-bold text-sm uppercase">
+          {menuItems.map((item) => (
+            <li key={item.label}>
+              {item.href ? (
+                <NavLink
+                  to={item.href}
+                  className={({ isActive }) =>
+                    `px-2 py-1 rounded transition ${
+                      isActive
+                        ? "text-primary font-bold underline"
+                        : "hover:bg-contrastHover"
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ) : (
+                <a
+                  href={`#${item.id}`}
+                  onClick={(e) => handleScroll(e, item.id)}
+                  className="hover:bg-contrastHover px-2 py-1 rounded transition"
+                >
+                  {item.label}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        {/* Search + Cart */}
+        <div className="flex items-center gap-4">
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={handleSearch}
-            className="border border-primary px-4 py-2 w-full max-w-xs hidden sm:block"
+            className="border border-primary px-4 py-2 w-48"
           />
-        </div>
 
-        {/* Cart + Mobile Menu Toggle */}
-        <div className="flex items-center gap-4">
           <button
             onClick={() => navigate("/cart")}
             aria-label="View cart"
@@ -83,46 +115,47 @@ function Navbar({ cartCount }) {
               </span>
             )}
           </button>
+        </div>
+      </div>
+
+      {/* Mobile View */}
+      <div className="md:hidden px-4 py-3 flex justify-between items-center">
+        <div
+          onClick={(e) => handleScroll(e, "home")}
+          className="cursor-pointer"
+        >
+          <img
+            src={StoreLogo}
+            alt="LILIANDO Store Logo"
+            className="h-10 w-auto object-contain"
+          />
+        </div>
+
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate("/cart")}
+            aria-label="View cart"
+            className="relative"
+          >
+            <ShoppingCart size={26} />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {cartCount}
+              </span>
+            )}
+          </button>
 
           <button
-            className="md:hidden"
+            className=""
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            <Menu size={28} />
+            <Menu size={26} />
           </button>
         </div>
       </div>
 
-      {/* Desktop Menu */}
-      <ul className="hidden md:flex flex-wrap justify-center gap-4 font-bold text-sm uppercase px-4 pb-3">
-        {menuItems.map((item) => (
-          <li key={item.label}>
-            {item.href ? (
-              <NavLink
-                to={item.href}
-                className={({ isActive }) =>
-                  `px-2 py-1 rounded transition ${
-                    isActive ? "text-primary font-bold underline" : "hover:bg-contrastHover"
-                  }`
-                }
-              >
-                {item.label}
-              </NavLink>
-            ) : (
-              <a
-                href={`#${item.id}`}
-                onClick={(e) => handleScroll(e, item.id)}
-                className="hover:bg-contrastHover px-2 py-1 rounded transition"
-              >
-                {item.label}
-              </a>
-            )}
-          </li>
-        ))}
-      </ul>
-
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 flex flex-col gap-2 font-bold text-sm uppercase bg-white shadow-inner">
           <input
@@ -141,7 +174,9 @@ function Navbar({ cartCount }) {
                 onClick={() => setMenuOpen(false)}
                 className={({ isActive }) =>
                   `px-2 py-1 rounded transition ${
-                    isActive ? "text-primary font-bold underline" : "hover:bg-contrastHover"
+                    isActive
+                      ? "text-primary font-bold underline"
+                      : "hover:bg-contrastHover"
                   }`
                 }
               >
