@@ -50,15 +50,15 @@ function Home({ onAddToCart }) {
 
         <div className="md:col-span-2 flex flex-col sm:flex-row justify-center gap-4 md:gap-0">
           <img
-            src={SkaterGirl1}
-            alt="Skater Girl 01"
-            className="shadow-lg w-full sm:w-1/2 h-[300px] sm:h-[500px] object-cover"
-          />
-          <img
-            src={SkaterGirl2}
-            alt="Skater Girl 02"
-            className="shadow-lg w-full sm:w-1/2 h-[300px] sm:h-[500px] object-cover"
-          />
+  src={SkaterGirl1}
+  alt="Skater Girl 01"
+  className="aspect-[3/4] shadow-lg w-full sm:w-1/2 object-cover"
+/>
+<img
+  src={SkaterGirl2}
+  alt="Skater Girl 02"
+  className="aspect-[3/4] shadow-lg w-full sm:w-1/2 object-cover"
+/>
         </div>
       </section>
 
