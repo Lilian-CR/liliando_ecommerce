@@ -27,7 +27,7 @@ function Navbar({ cartCount }) {
       }
     }
 
-    setMenuOpen(false); // close mobile menu after click
+    setMenuOpen(false);
   };
 
   const handleSearch = (e) => {
@@ -49,9 +49,9 @@ function Navbar({ cartCount }) {
 
   return (
     <nav className="sticky top-0 z-50 bg-white text-primary shadow-md">
-      <div className="flex justify-between items-center px-4 py-3 md:px-32">
+      <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 px-4 py-3 md:px-32">
         {/* Logo + Search */}
-        <div className="flex items-center gap-4 w-full md:w-auto">
+        <div className="flex items-center gap-4 flex-grow">
           <div onClick={(e) => handleScroll(e, "home")} className="cursor-pointer">
             <img
               src={StoreLogo}
@@ -71,7 +71,6 @@ function Navbar({ cartCount }) {
 
         {/* Cart + Mobile Menu Toggle */}
         <div className="flex items-center gap-4">
-          {/* Cart Icon */}
           <button
             onClick={() => navigate("/cart")}
             aria-label="View cart"
@@ -85,7 +84,6 @@ function Navbar({ cartCount }) {
             )}
           </button>
 
-          {/* Hamburger Menu */}
           <button
             className="md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
